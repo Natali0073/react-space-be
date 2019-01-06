@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/core": "7.1.6",
     "@material-ui/core": "^3.8.1",
+    "@material-ui/icons": "^3.0.1",
     "@svgr/webpack": "2.4.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
@@ -40,10 +41,13 @@
     "postcss-loader": "3.0.0",
     "postcss-preset-env": "6.3.1",
     "postcss-safe-parser": "4.0.1",
+    "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-app-polyfill": "^0.2.0",
     "react-dev-utils": "^7.0.0",
     "react-dom": "^16.7.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
     "resolve": "1.8.1",
     "rxjs": "^6.3.3",
     "sass-loader": "7.1.0",
@@ -71,6 +75,7 @@
   ],
   "devDependencies": {
     "node-sass": "^4.11.0",
+    "react-create": "^1.0.2",
     "sass-loader": "^7.1.0"
   },
   "jest": {
