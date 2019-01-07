@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './App.css';
 import Header from '../Header/Header';
 import Routes from '../Routes/Routes';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   render() {
@@ -9,6 +11,7 @@ class App extends Component {
         <div className="App">
           <Header />
           <Routes />
+          <ToastContainer />
         </div>
     );
   }

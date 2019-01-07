@@ -1,15 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import {withStyles} from '@material-ui/core';
+import Home from '@material-ui/icons/Home';
+import People from '@material-ui/icons/People';
+import ArrowForward from '@material-ui/icons/ArrowForward';
+import { withStyles } from '@material-ui/core';
 import * as PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = {
   navigation: {
@@ -25,33 +27,49 @@ class Header extends Component {
     }
   }
 
+  handleChange = (event, value) => {
+    this.setState({value});
+  };
+
   render() {
     const {classes} = this.props;
+    if (window.location.pathname === '/login') {
+      return null;
+    }
     return (
-        <div className="header">
-          <AppBar position="static" color="default">
-            <Toolbar>
-              <Grid container direction="row"
-                    justify="space-between"
-                    alignItems="center">
-                <Grid item xs>
-                  <BottomNavigation
-                      className={classes.navigation}
-                      value={this.state.value}
-                      onChange={this.handleChange}
-                      showLabels>
-                    <BottomNavigationAction label="Home" icon={<RestoreIcon/>}/>
-                    <BottomNavigationAction label="Contacts" icon={<FavoriteIcon/>}/>
-                    <BottomNavigationAction label="Calendar" icon={<FavoriteIcon/>}/>
-                  </BottomNavigation>
-                </Grid>
-                <Grid item>
-                  <Button color="inherit">Logout</Button>
-                </Grid>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Grid container direction="row"
+                  justify="space-between"
+                  alignItems="center">
+              <Grid item xs>
+                <BottomNavigation
+                    className={classes.navigation}
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    showLabels>
+                  <BottomNavigationAction
+                      label="Home"
+                      icon={<Home/>}
+                      component={Link}
+                      to="/"/>
+                  <BottomNavigationAction
+                      label="Contacts"
+                      icon={<People/>}
+                      component={Link}
+                      to="/contacts"/>
+                </BottomNavigation>
               </Grid>
-            </Toolbar>
-          </AppBar>
-        </div>
+              <Grid item>
+                <Tooltip title="Log out">
+                  <IconButton aria-label="Log out">
+                    <Link to='/login'><ArrowForward/></Link>
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            </Grid>
+          </Toolbar>
+        </AppBar>
     )
   }
 }

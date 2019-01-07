@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import {withStyles} from '@material-ui/core/styles';
 import * as PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import {Link} from 'react-router-dom';
+import {toast} from 'react-toastify';
+import {Redirect} from 'react-router';
 
 const styles = theme => ({
   container: {
@@ -24,11 +23,14 @@ const styles = theme => ({
 });
 
 class LoginComponent extends Component {
+  toastId = null;
+
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: '',
+      redirectMe: false
     }
   }
 
@@ -44,21 +46,30 @@ class LoginComponent extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state.email);
-    // browserHistory.push('/login');
+    if (this.state.email === 'test@gmail.com' && this.state.password === '12345') {
+      this.setState({
+        redirectMe: true
+      })
+    } else {
+      if (! toast.isActive(this.toastId)) {
+        this.toastId = toast.error('Email or password incorrect');
+      }
+    }
   }
 
   render() {
+    let { redirectMe } = this.state;
+    if(redirectMe) {
+      return (
+          <Redirect to="/home"/>
+      );
+    }
     const {classes} = this.props;
     return (
         <div className="login-component">
-          <AppBar color="default" position="sticky">
-            <Toolbar>
-              <Typography variant="h6" color="inherit">
-                Login
-              </Typography>
-            </Toolbar>
-          </AppBar>
+          <Typography variant="h6" color="inherit">
+            Login
+          </Typography>
           <Grid container direction="column" alignItems="center">
             <form className={classes.container} onSubmit={this.handleSubmit.bind(this)}>
               <TextField
