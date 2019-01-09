@@ -6,25 +6,20 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Home from '@material-ui/icons/Home';
 import People from '@material-ui/icons/People';
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import { withStyles } from '@material-ui/core';
-import * as PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-
-const styles = {
-  navigation: {
-    backgroundColor: 'transparent',
-  },
-};
+import {withRouter} from 'react-router-dom';
+import './style.scss';
 
 class Header extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      value: 0,
-    }
+      value: this.props.location.pathname === '/home' ? 0 : 1,
+    };
   }
 
   handleChange = (event, value) => {
@@ -32,8 +27,7 @@ class Header extends Component {
   };
 
   render() {
-    const {classes} = this.props;
-    if (window.location.pathname === '/login') {
+    if (this.props.location.pathname === '/login') {
       return null;
     }
     return (
@@ -44,7 +38,7 @@ class Header extends Component {
                   alignItems="center">
               <Grid item xs>
                 <BottomNavigation
-                    className={classes.navigation}
+                    className="navigation"
                     value={this.state.value}
                     onChange={this.handleChange}
                     showLabels>
@@ -63,7 +57,7 @@ class Header extends Component {
               <Grid item>
                 <Tooltip title="Log out">
                   <IconButton aria-label="Log out">
-                    <Link to='/login'><ArrowForward/></Link>
+                    <Link to='/login' className="logoutButton"><ArrowForward/></Link>
                   </IconButton>
                 </Tooltip>
               </Grid>
@@ -74,8 +68,4 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Header);
+export default withRouter(Header);
