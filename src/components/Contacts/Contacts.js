@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Route, Switch} from 'react-router';
-import ContactsList from './ContactsList/ContactsList';
-import ContactProfile from './ContactProfile/ContactProfile';
+import ContactsList from './ContactsList';
+import ContactProfile from './ContactProfile';
 
 class Contacts extends Component {
   render() {

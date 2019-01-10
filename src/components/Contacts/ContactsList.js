@@ -37,10 +37,6 @@ const columnsNames = ['#', 'name', 'surname', 'position', 'office', 'phone', 'sk
 const columnsKeys = ['firstName', 'lastName', 'position', 'office', 'phoneOne', 'skype', 'email'];
 
 class ContactsList extends Component {
-  state = {
-    order: 'asc',
-    orderBy: 'calories',
-  };
 
   render() {
     const {classes} = this.props;
