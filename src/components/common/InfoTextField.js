@@ -1,39 +1,40 @@
-import { Component } from 'react';
-import React from 'react';
+import React, { Component } from 'react';
 import * as PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import './infro-text-field.scss';
+import { FormControl, InputAdornment, TextField } from '@material-ui/core';
 
 class InfoTextField extends Component {
 
   render() {
     return (
-        <div>
-
-          <FormControl>
-            <InputLabel htmlFor="input-with-icon-adornment">{this.props.label}</InputLabel>
-            <Input
-                disabled
+        <div className="text-field-container">
+          <FormControl className="form-control">
+            <TextField
+                label={this.props.label}
                 id="input-with-icon-adornment"
-                value={this.props.value}
-                endAdornment={
-                  <InputAdornment position="end">
-                    {this.props.children}
-                  </InputAdornment>
-                }
+                value={this.props.value ? this.props.value : ''}
+                placeholder={this.props.placeholder}
+                InputProps={{
+                  readOnly: true,
+                  endAdornment: (
+                      <InputAdornment position="end">
+                        {this.props.children}
+                      </InputAdornment>
+                  ),
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
             />
           </FormControl>
         </div>
     )
   }
-
 }
 
 InfoTextField.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
 };
 
 export default InfoTextField;

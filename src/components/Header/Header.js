@@ -18,7 +18,7 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      value: this.props.location.pathname === '/home' ? 0 : 1,
+      value: ['/', '/home'].includes(this.props.location.pathname) ? 0 : 1,
     };
   }
 
@@ -46,7 +46,7 @@ class Header extends Component {
                       label="Home"
                       icon={<Home/>}
                       component={Link}
-                      to="/"/>
+                      to="/home"/>
                   <BottomNavigationAction
                       label="Contacts"
                       icon={<People/>}
