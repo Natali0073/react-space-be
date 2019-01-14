@@ -3,6 +3,10 @@
   display: flex;
   flex-direction: column;
 
+  .image-container, .contact-name {
+    text-align: center;
+  }
+
   .contact-name {
     text-transform: uppercase;
     padding-bottom: 20px;

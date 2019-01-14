@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './contact-profile.scss';
 import { contactsList } from './contacts-list-mock';
-import InfoTextField from '../common/InfoTextField';
+import InfoTextField from '../common/InfoTextField/InfoTextField';
 import Grid from '@material-ui/core/Grid';
 import Profile from '../../assets/images/profile.svg';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -42,7 +42,7 @@ class ContactProfile extends Component {
     }
     return (
         <div className="contact-profile-container">
-          <div>
+          <div className="image-container">
             <img src={Profile} alt="Profile" width="200px"/>
           </div>
           <div className="contact-name">{contact.firstName} {contact.lastName}</div>
