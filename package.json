@@ -7,6 +7,13 @@
     "@material-ui/core": "^3.8.1",
     "@material-ui/icons": "^3.0.1",
     "@svgr/webpack": "2.4.1",
+    "@types/jest": "^23.3.12",
+    "@types/jss": "^9.5.7",
+    "@types/node": "^10.12.18",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-router": "^4.4.3",
+    "@types/react-router-dom": "^4.3.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
@@ -34,6 +41,7 @@
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
+    "jss": "^10.0.0-alpha.3",
     "mini-css-extract-plugin": "0.4.3",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
@@ -75,9 +83,12 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
     "node-sass": "^4.11.0",
     "react-create": "^1.0.2",
-    "sass-loader": "^7.1.0"
+    "sass-loader": "^7.1.0",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.2.2"
   },
   "jest": {
     "collectCoverageFrom": [

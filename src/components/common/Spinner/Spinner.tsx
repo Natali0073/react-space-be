@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import CircularProgress from '../../Home/Home';
-import React from 'react';
+import * as React from 'react';
 import Fade from '@material-ui/core/Fade';
 
 class Spinner extends Component {

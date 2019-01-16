@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+import {Component} from 'react';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import {withStyles} from '@material-ui/core/styles';

@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import * as React from 'react';
+import { Component } from 'react';
 import './contact-profile.scss';
 import { contactsList } from './contacts-list-mock';
-import InfoTextField from '../common/InfoTextField/InfoTextField';
+import * as InfoTextField from '../common/InfoTextField/InfoTextField';
 import Grid from '@material-ui/core/Grid';
 import Profile from '../../assets/images/profile.svg';
 import withStyles from '@material-ui/core/styles/withStyles';

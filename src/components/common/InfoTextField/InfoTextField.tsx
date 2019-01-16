@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import * as React from 'react';
+import { Component } from 'react';
 import * as PropTypes from 'prop-types';
 import './infro-text-field.scss';
 import { FormControl, InputAdornment, TextField } from '@material-ui/core';
