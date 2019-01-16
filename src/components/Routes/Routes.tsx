@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Route, Switch} from 'react-router-dom';
 import Home from '../Home/Home';
-import LoginComponent from '../auth/LoginComponent/LoginComponent';
+import LoginComponent from '../LoginComponent/LoginComponent';
 import Contacts from '../Contacts/Contacts';
+import { Route, Switch } from 'react-router';
 
 class Routes extends Component {
   render() {

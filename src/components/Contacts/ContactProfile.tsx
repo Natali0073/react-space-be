@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Profile from '../../assets/images/profile.svg';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { AccountCircle, LocationOn, DateRange, Phone, Email, QueryBuilder, Textsms } from '@material-ui/icons';
+import { RouteComponentProps } from 'react-router';
 
 const styles = {
   icon: {
@@ -13,12 +14,13 @@ const styles = {
   },
 };
 
-class ContactProfile extends Component {
-  constructor(props) {
+class ContactProfile extends Component<ContactProfileProps, ContactProfileState> {
+
+  constructor(props: ContactProfileProps) {
     super(props);
     this.state = {
-      contactId: props.match.params.id,
-      contact: {},
+      contactId: this.props.match.params.id,
+      contact: {} as Contact,
       loading: true
     }
   }
@@ -27,6 +29,7 @@ class ContactProfile extends Component {
     let contacts = contactsList;
     contacts = contacts.filter(el => el.id === +this.state.contactId);
     this.setState({
+      contactId: this.props.match.params.id,
       contact: contacts[0],
       loading: false,
     });
@@ -116,3 +119,28 @@ class ContactProfile extends Component {
 }
 
 export default withStyles(styles)(ContactProfile);
+
+export interface ContactProfileProps extends RouteComponentProps<any> {
+  classes: {
+    icon: string;
+  };
+}
+
+export interface ContactProfileState {
+  contactId: string;
+  contact: Contact;
+  loading: boolean;
+}
+
+export interface Contact {
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  phoneOne: string;
+  phoneTwo: string | null;
+  email: string;
+  personalEmail: string;
+  skype: string;
+  position: string;
+  office: string;
+}

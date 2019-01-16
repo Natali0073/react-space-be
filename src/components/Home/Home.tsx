@@ -10,14 +10,11 @@ const styles = {
   },
 };
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      personInfo: null,
-      loading: true,
-    }
-  }
+class Home extends Component<{}, HomeState> {
+  state = {
+    personInfo: {} as PersonInfo,
+    loading: true,
+  };
 
   componentDidMount() {
     this.setState({
@@ -68,3 +65,35 @@ class Home extends Component {
 }
 
 export default withStyles(styles)(Home);
+
+export interface HomeState {
+  personInfo: PersonInfo;
+  loading: boolean
+}
+
+export interface PersonInfo {
+  fullName: string;
+  position: string;
+  manager: PersonCommon;
+  hrManager: PersonCommon;
+  department: string;
+  id: number,
+  email: string;
+  mentor: string | null;
+  office: string;
+  roles: Role[],
+  sombraMoney: string | null;
+  vacationDaysLeft: number;
+}
+
+export interface PersonCommon {
+  firstname: string;
+  lastname: string;
+  id: number;
+  corporateEmail: string;
+}
+
+export interface Role {
+  id: number;
+  roleType: string;
+}

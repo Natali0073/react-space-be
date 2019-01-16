@@ -2,30 +2,31 @@ import React, {Component} from 'react';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import {withStyles} from '@material-ui/core/styles';
-import * as PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import {toast} from 'react-toastify';
 import {Redirect} from 'react-router';
+import { Theme } from '@material-ui/core';
+import createStyles from '@material-ui/core/styles/createStyles';
 
-const styles = theme => ({
+const styles = ({ spacing }: Theme) => createStyles({
   container: {
     display: 'flex',
     flexDirection: 'column'
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: spacing.unit,
+    marginRight: spacing.unit,
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: spacing.unit,
   },
 });
 
-class LoginComponent extends Component {
-  toastId = null;
+class LoginComponent extends Component<LoginComponentProps, LoginComponentState>  {
+  toastId = 0;
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       email: '',
@@ -38,13 +39,13 @@ class LoginComponent extends Component {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
-  handleChange = name => event => {
+  handleChange = (name: string) => (event: any) => {
     this.setState({
       [name]: event.target.value,
     })
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit(event: any) {
     event.preventDefault();
     if (this.state.email === 'test@gmail.com' && this.state.password === '12345') {
       this.setState({
@@ -106,8 +107,15 @@ class LoginComponent extends Component {
   }
 }
 
-LoginComponent.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
 export default withStyles(styles)(LoginComponent);
+
+export interface LoginComponentProps {
+  classes: any;
+}
+
+export interface LoginComponentState {
+  email: string;
+  password: string;
+  redirectMe?: boolean;
+  [x: string]: any;
+}
