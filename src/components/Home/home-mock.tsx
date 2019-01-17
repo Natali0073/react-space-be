@@ -1,4 +1,5 @@
-export const homeData = {
+import { PersonInfo } from './Home';
+export const homeData: PersonInfo = {
   id: 90,
   department: 'Delivery',
   email: 'natalia.makarchuk@sombrainc.com',

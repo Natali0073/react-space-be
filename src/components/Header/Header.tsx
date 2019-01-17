@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Component } from 'react';
+import React, {Component} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -8,14 +7,14 @@ import Home from '@material-ui/icons/Home';
 import People from '@material-ui/icons/People';
 import ArrowForward from '@material-ui/icons/ArrowForward';
 import Grid from '@material-ui/core/Grid';
-import { Link } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import './style.scss';
+import {RouteComponentProps} from 'react-router';
 
-class Header extends Component {
-  constructor(props) {
+class Header extends Component<RouteComponentProps, HeaderState> {
+  constructor(props: RouteComponentProps) {
     super(props);
 
     this.state = {
@@ -23,7 +22,7 @@ class Header extends Component {
     };
   }
 
-  handleChange = (event, value) => {
+  handleChange = (event: any, value: any) => {
     this.setState({value});
   };
 
@@ -38,22 +37,24 @@ class Header extends Component {
                   justify="space-between"
                   alignItems="center">
               <Grid item xs>
-                <BottomNavigation
-                    className="navigation"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    showLabels>
-                  <BottomNavigationAction
-                      label="Home"
-                      icon={<Home/>}
-                      component={Link}
-                      to="/home"/>
-                  <BottomNavigationAction
-                      label="Contacts"
-                      icon={<People/>}
-                      component={Link}
-                      to="/contacts"/>
-                </BottomNavigation>
+                {/*<BottomNavigation*/}
+                {/*className="navigation"*/}
+                {/*value={this.state.value}*/}
+                {/*onChange={this.handleChange}*/}
+                {/*showLabels>*/}
+                {/*<BottomNavigationAction*/}
+                {/*label="Home"*/}
+                {/*icon={<Home/>}*/}
+                {/*component={Link}*/}
+                {/*to="/home"/>*/}
+                {/*<BottomNavigationAction*/}
+                {/*label="Contacts"*/}
+                {/*icon={<People/>}*/}
+                {/*component={Link}*/}
+                {/*to="/contacts"/>*/}
+                {/*</BottomNavigation>*/}
+                <Link to='/home'>Home</Link>
+                <Link to='/contacts'>Contacts</Link>
               </Grid>
               <Grid item>
                 <Tooltip title="Log out">
@@ -70,3 +71,7 @@ class Header extends Component {
 }
 
 export default withRouter(Header);
+
+export interface HeaderState {
+  value: number;
+}

@@ -1,39 +1,39 @@
-import * as React from 'react';
-import { Component } from 'react';
+import React, {Component} from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import { Link } from 'react-router-dom';
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import { contactsList } from './contacts-list-mock';
-import { Table, TableRow, TableCell, TableBody, TableHead } from '@material-ui/core';
+import {contactsList} from './contacts-list-mock';
+import {Table, TableRow, TableCell, TableBody, TableHead, Theme} from '@material-ui/core';
+import {Link} from 'react-router-dom';
+import createStyles from '@material-ui/core/styles/createStyles';
 
-const styles = theme => ({
+const styles = ({palette}: Theme) => createStyles({
       container: {
         width: '100%',
         overflowX: 'auto',
       },
       headerRow: {
-        textTransform: 'upperCase',
+        textTransform: 'uppercase',
       },
       row: {
         '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.background.default,
+          backgroundColor: palette.background.default,
         },
       },
       linkColumn: {
-        color: theme.palette.common.black,
+        color: palette.common.black,
       },
       tableRowHover: {
         '&:hover': {
-          backgroundColor: theme.palette.grey[200],
+          backgroundColor: palette.grey[200],
         },
       },
     }
 );
 
-const columnsNames = ['#', 'name', 'surname', 'position', 'office', 'phone', 'skype', 'corporate email', ''];
-const columnsKeys = ['firstName', 'lastName', 'position', 'office', 'phoneOne', 'skype', 'email'];
+const columnsNames: string[] = ['#', 'name', 'surname', 'position', 'office', 'phone', 'skype', 'corporate email', ''];
+const columnsKeys: string[] = ['firstName', 'lastName', 'position', 'office', 'phoneOne', 'skype', 'email'];
 
-class ContactsList extends Component {
+class ContactsList extends Component<ContactsListProps, {}> {
 
   render() {
     const {classes} = this.props;
@@ -51,7 +51,7 @@ class ContactsList extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {contactsList.map((el, index) => {
+              {contactsList.map((el: any, index) => {
                 return (
                     <TableRow className={[classes.row, classes.tableRowHover].join(' ')} key={index}>
                       <TableCell>{index + 1}</TableCell>
@@ -75,3 +75,21 @@ class ContactsList extends Component {
 }
 
 export default withStyles(styles)(ContactsList);
+
+export interface ContactsListProps {
+  classes: any;
+}
+
+export interface ContactsListDTO {
+  birthDate: string;
+  email: string;
+  firstName: string;
+  id: number;
+  lastName: string;
+  office: string;
+  personalEmail: string;
+  phoneOne: string;
+  phoneTwo: string | null,
+  position: string;
+  skype: string;
+}

@@ -1,4 +1,5 @@
-export const contactsList = [
+import { ContactsListDTO } from './ContactsList';
+export const contactsList: ContactsListDTO[] = [
   {
     birthDate: '1995-10-17',
     email: 'andrii.didovych@sombrainc.com',
@@ -260,3 +261,4 @@ export const contactsList = [
     skype: 'katrin.dzigua',
   }
 ];
+
