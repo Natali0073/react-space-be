@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import ArrowForward from '@material-ui/icons/ArrowForward';
-import {contactsList} from './contacts-list-mock';
+// import {contactsList} from './contacts-list-mock';
 import {Table, TableRow, TableCell, TableBody, TableHead, Theme} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import createStyles from '@material-ui/core/styles/createStyles';
+import store from '../../store';
+import {addContact} from '../../actions';
 
 const styles = ({palette}: Theme) => createStyles({
       container: {
@@ -36,7 +38,27 @@ const columnsKeys: string[] = ['firstName', 'lastName', 'position', 'office', 'p
 class ContactsList extends Component<ContactsListProps, {}> {
 
   render() {
+    store.subscribe(() => {
+      console.log('Look ma, Redux!!')
+    });
+    store.dispatch( addContact(
+        {
+          birthDate: '1995-10-17',
+          email: 'andrii.didovych@sombrainc.com',
+          firstName: 'TEST',
+          id: 200,
+          lastName: 'TEST',
+          office: 'LV',
+          personalEmail: 'andrii.didovych@gmail.com',
+          phoneOne: '098 709 24 60',
+          phoneTwo: null,
+          position: 'Trainee Java developer',
+          skype: 'live:andrii.didovych',
+        },
+    ));
+
     const {classes} = this.props;
+    const {contactsList} = store.getState();
 
     return (
         <div className={classes.container}>
