@@ -7,6 +7,7 @@ import Profile from '../../assets/images/profile.svg';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {AccountCircle, LocationOn, DateRange, Phone, Email, QueryBuilder, Textsms} from '@material-ui/icons';
 import {RouteComponentProps} from 'react-router';
+import {Contact} from '../../interfaces/contact';
 
 const styles = {
   icon: {
@@ -130,17 +131,4 @@ export interface ContactProfileState {
   contactId: string;
   contact: Contact;
   loading: boolean;
-}
-
-export interface Contact {
-  firstName: string;
-  lastName: string;
-  birthDate: string;
-  phoneOne: string;
-  phoneTwo: string | null;
-  email: string;
-  personalEmail: string;
-  skype: string;
-  position: string;
-  office: string;
 }

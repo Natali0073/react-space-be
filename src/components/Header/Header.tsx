@@ -25,7 +25,7 @@ class Header extends Component<RouteComponentProps, HeaderState> {
     };
   }
 
-  handleChange = (event: object, value: number) => {
+  handleChangeRouting = (event: object, value: number) => {
     this.setState({value});
     const route = value === 0 ? '/home' : '/contacts';
     this.props.history.push(route);
@@ -35,6 +35,14 @@ class Header extends Component<RouteComponentProps, HeaderState> {
     this.setState({
       open: true
     })
+  };
+
+  handleCloseModal = () => {
+    this.setState({ open: false });
+  };
+
+  handleLogout = () => {
+    localStorage.setItem('login', 'false');
   };
 
   render() {
@@ -51,7 +59,7 @@ class Header extends Component<RouteComponentProps, HeaderState> {
                 <BottomNavigation
                     className="navigation"
                     value={this.state.value}
-                    onChange={this.handleChange}
+                    onChange={this.handleChangeRouting}
                     showLabels={true}>
                   <BottomNavigationAction
                       label="Home"
@@ -62,20 +70,22 @@ class Header extends Component<RouteComponentProps, HeaderState> {
                 </BottomNavigation>
               </Grid>
               <Grid item>
-                <Tooltip title="Add contact">
-                  <IconButton aria-label="Add contact" onClick={this.handleAddContact}>
-                    <PersonAdd/>
-                  </IconButton>
-                </Tooltip>
+                {this.state.value === 1 ?
+                    <Tooltip title="Add contact">
+                      <IconButton aria-label="Add contact" onClick={this.handleAddContact}>
+                        <PersonAdd/>
+                      </IconButton>
+                    </Tooltip> : null
+                }
                 <Tooltip title="Log out">
-                  <IconButton aria-label="Log out">
+                  <IconButton aria-label="Log out" onClick={this.handleLogout}>
                     <Link to='/login' className="logoutButton"><ArrowForward/></Link>
                   </IconButton>
                 </Tooltip>
               </Grid>
             </Grid>
           </Toolbar>
-          <SimpleDialogWrapped open={this.state.open}/>
+          <SimpleDialogWrapped open={this.state.open} onClose={this.handleCloseModal}/>
         </AppBar>
     )
   }

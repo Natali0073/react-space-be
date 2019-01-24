@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, FormEvent} from 'react';
 import {Dialog, Theme} from '@material-ui/core';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -10,6 +10,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import withStyles from '@material-ui/core/styles/withStyles';
 import createStyles from '@material-ui/core/styles/createStyles';
+import Button from '@material-ui/core/Button';
+import store from '../../store';
+import {addContact} from '../../actions';
 
 const styles = ({spacing}: Theme) => createStyles({
   formControl: {
@@ -20,6 +23,7 @@ const styles = ({spacing}: Theme) => createStyles({
   selectFormControl: {
     margin: spacing.unit,
     minWidth: 167,
+    maxWidth: 167,
   }
 });
 
@@ -45,17 +49,58 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
     birthDate: '',
   };
 
-  handleClose = () => {
-    // this.props.onClose(this.props.selectedValue);
+  handleCancel = () => {
+    this.props.onClose();
+  };
+
+  handleChange = (name: string) => (event: any) => {
+    this.setState({
+      [name]: event.target.value,
+    })
+  };
+
+  handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    store.dispatch( addContact(
+        {
+          birthDate: '1995-10-17',
+          email: this.state.email,
+          firstName: this.state.name,
+          id: Math.floor(Math.random() * Math.floor(300)),
+          lastName: this.state.surname,
+          office: this.state.office,
+          personalEmail: this.state.personalEmail ? this.state.personalEmail : null,
+          phoneOne: this.state.phoneOne,
+          phoneTwo: this.state.phoneOne ? this.state.phoneOne : null,
+          position: this.state.position,
+          skype: this.state.skype,
+        },
+    ));
+
+    this.setState({
+      name: '',
+      surname: '',
+      email: '',
+      personalEmail: '',
+      position: '',
+      office: '',
+      phoneOne: '',
+      phoneTwo: '',
+      skype: '',
+      birthDate: '',
+    });
+
+    this.props.onClose();
   };
 
   render() {
     const {classes} = this.props;
     return (
-        <Dialog onClose={this.handleClose} open={this.props.open} aria-labelledby="simple-dialog-title">
+        <Dialog open={this.props.open} aria-labelledby="simple-dialog-title">
           <DialogTitle id="simple-dialog-title">Create new Contact</DialogTitle>
           <DialogContent>
-            <form action="">
+            <form onSubmit={this.handleSubmit.bind(this)}>
               <Grid container justify="center" alignItems="center" className="info-row">
                 <Grid item>
                   <FormControl className={classes.formControl}>
@@ -66,7 +111,8 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
                         label="Name"
                         type="text"
                         fullWidth
-                        value={this.state.name}/>
+                        value={this.state.name}
+                        onChange={this.handleChange('name')}/>
                   </FormControl>
                 </Grid>
                 <Grid item>
@@ -78,7 +124,8 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
                         label="Surname"
                         type="text"
                         fullWidth
-                        value={this.state.surname}/>
+                        value={this.state.surname}
+                        onChange={this.handleChange('surname')}/>
                   </FormControl>
                 </Grid>
               </Grid>
@@ -87,6 +134,7 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
                   <FormControl className={classes.selectFormControl}>
                     <InputLabel htmlFor="position">Position</InputLabel>
                     <Select value={this.state.position}
+                            onChange={this.handleChange('position')}
                             inputProps={{
                               id: 'position',
                             }}>
@@ -100,6 +148,7 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
                   <FormControl className={classes.selectFormControl}>
                     <InputLabel htmlFor="office">Office</InputLabel>
                     <Select value={this.state.office}
+                            onChange={this.handleChange('office')}
                             inputProps={{
                               id: 'office',
                             }}>
@@ -120,7 +169,8 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
                         label="Email"
                         type="email"
                         fullWidth
-                        value={this.state.email}/>
+                        value={this.state.email}
+                        onChange={this.handleChange('email')}/>
                   </FormControl>
                 </Grid>
                 <Grid item>
@@ -132,7 +182,8 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
                         label="Personal Email"
                         type="email"
                         fullWidth
-                        value={this.state.personalEmail}/>
+                        value={this.state.personalEmail}
+                        onChange={this.handleChange('personalEmail')}/>
                   </FormControl>
                 </Grid>
               </Grid>
@@ -146,7 +197,8 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
                         label="Phone one"
                         type="text"
                         fullWidth
-                        value={this.state.phoneOne}/>
+                        value={this.state.phoneOne}
+                        onChange={this.handleChange('phoneOne')}/>
                   </FormControl>
                 </Grid>
                 <Grid item>
@@ -158,8 +210,36 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
                         label="Phone two"
                         type="text"
                         fullWidth
-                        value={this.state.phoneTwo}/>
+                        value={this.state.phoneTwo}
+                        onChange={this.handleChange('phoneTwo')}/>
                   </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container justify="flex-start" className="info-row">
+                <Grid item>
+                  <FormControl className={classes.formControl}>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="skype"
+                        label="Skype"
+                        type="text"
+                        fullWidth
+                        value={this.state.skype}
+                        onChange={this.handleChange('skype')}/>
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container spacing={16} justify="center">
+                <Grid item>
+                  <Button variant="contained" onClick={this.handleCancel}>
+                    Cancel
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button variant="contained" color="primary" type="submit">
+                    Save
+                  </Button>
                 </Grid>
               </Grid>
             </form>
@@ -174,10 +254,11 @@ export const SimpleDialogWrapped = withStyles(styles)(AddContactModal);
 export interface AddContactModalProps {
   open: boolean;
   classes: any;
+  onClose: any;
 }
 
 export interface AddContactModalState {
-  name: string;
+  [name: string]: string;
   surname: string;
   email: string;
   personalEmail: string;

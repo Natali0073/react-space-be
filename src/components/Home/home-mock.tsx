@@ -1,4 +1,5 @@
-import { PersonInfo } from './Home';
+import {PersonInfo} from '../../interfaces/personal-info';
+
 export const homeData: PersonInfo = {
   id: 90,
   department: 'Delivery',

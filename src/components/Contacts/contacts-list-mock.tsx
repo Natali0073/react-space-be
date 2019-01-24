@@ -1,4 +1,5 @@
-import { ContactsListDTO } from './ContactsList';
+import {ContactsListDTO} from '../../interfaces/contact';
+
 export const contactsList: ContactsListDTO[] = [
   {
     birthDate: '1995-10-17',

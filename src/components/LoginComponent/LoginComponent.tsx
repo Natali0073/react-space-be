@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, FormEvent} from 'react';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import {withStyles} from '@material-ui/core/styles';
@@ -21,6 +21,9 @@ const styles = ({spacing}: Theme) => createStyles({
   button: {
     margin: spacing.unit,
   },
+  title: {
+    textAlign: 'center',
+  }
 });
 
 class LoginComponent extends Component<LoginComponentProps, LoginComponentState> {
@@ -45,12 +48,13 @@ class LoginComponent extends Component<LoginComponentProps, LoginComponentState>
     })
   };
 
-  handleSubmit(event: any) {
+  handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (this.state.email === 'test@gmail.com' && this.state.password === '12345') {
       this.setState({
         redirectMe: true
-      })
+      });
+      localStorage.setItem('login', 'true');
     } else {
       if (!toast.isActive(this.toastId)) {
         this.toastId = toast.error('Email or password incorrect');
@@ -68,7 +72,7 @@ class LoginComponent extends Component<LoginComponentProps, LoginComponentState>
     const {classes} = this.props;
     return (
         <div className="login-component">
-          <Typography variant="h6" color="inherit">
+          <Typography variant="h6" color="inherit" className={classes.title}>
             Login
           </Typography>
           <Grid container direction="column" alignItems="center">

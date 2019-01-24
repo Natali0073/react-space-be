@@ -5,12 +5,15 @@ const initialState = {
   contactsList: contactsList,
 };
 function rootReducer(state = initialState, action: Actions) {
-  if (action.type === ADD_CONTACT) {
-    return Object.assign({}, state, {
-      contactsList: state.contactsList.concat(action.payload)
-    });
+  switch (action.type) {
+    case ADD_CONTACT:
+      return Object.assign({}, state, {
+        contactsList: state.contactsList.concat(action.payload)
+      });
+
+    default:
+      return state;
   }
-  return state;
 }
 
 export default rootReducer;

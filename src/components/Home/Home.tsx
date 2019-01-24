@@ -3,6 +3,7 @@ import Profile from '../../assets/images/profile.svg';
 import {homeData} from './home-mock';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Spinner from '../common/Spinner/Spinner';
+import {PersonInfo} from '../../interfaces/personal-info';
 
 const styles = {
   icon: {
@@ -69,31 +70,4 @@ export default withStyles(styles)(Home);
 export interface HomeState {
   personInfo: PersonInfo;
   loading: boolean
-}
-
-export interface PersonInfo {
-  fullName: string;
-  position: string;
-  manager: PersonCommon;
-  hrManager: PersonCommon;
-  department: string;
-  id: number,
-  email: string;
-  mentor: string | null;
-  office: string;
-  roles: Role[],
-  sombraMoney: string | null;
-  vacationDaysLeft: number;
-}
-
-export interface PersonCommon {
-  firstname: string;
-  lastname: string;
-  id: number;
-  corporateEmail: string;
-}
-
-export interface Role {
-  id: number;
-  roleType: string;
 }
