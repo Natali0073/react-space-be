@@ -11,8 +11,9 @@ import FormControl from '@material-ui/core/FormControl';
 import withStyles from '@material-ui/core/styles/withStyles';
 import createStyles from '@material-ui/core/styles/createStyles';
 import Button from '@material-ui/core/Button';
-import store from '../../store';
 import {addContact} from '../../actions';
+import {connect} from 'react-redux';
+import {ContactsListDTO} from '../../interfaces/contact';
 
 const styles = ({spacing}: Theme) => createStyles({
   formControl: {
@@ -26,6 +27,12 @@ const styles = ({spacing}: Theme) => createStyles({
     maxWidth: 167,
   }
 });
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    addContact: (contact: ContactsListDTO) => dispatch(addContact(contact))
+  };
+}
 
 class AddContactModal extends Component<AddContactModalProps, AddContactModalState> {
   positions: string[] = [
@@ -62,21 +69,21 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
   handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    store.dispatch( addContact(
-        {
-          birthDate: '1995-10-17',
-          email: this.state.email,
-          firstName: this.state.name,
-          id: Math.floor(Math.random() * Math.floor(300)),
-          lastName: this.state.surname,
-          office: this.state.office,
-          personalEmail: this.state.personalEmail ? this.state.personalEmail : null,
-          phoneOne: this.state.phoneOne,
-          phoneTwo: this.state.phoneOne ? this.state.phoneOne : null,
-          position: this.state.position,
-          skype: this.state.skype,
-        },
-    ));
+    const newContact = {
+      birthDate: '1995-10-17',
+      email: this.state.email,
+      firstName: this.state.name,
+      id: Math.floor(Math.random() * Math.floor(300)),
+      lastName: this.state.surname,
+      office: this.state.office,
+      personalEmail: this.state.personalEmail ? this.state.personalEmail : null,
+      phoneOne: this.state.phoneOne,
+      phoneTwo: this.state.phoneOne ? this.state.phoneOne : null,
+      position: this.state.position,
+      skype: this.state.skype,
+    };
+
+    this.props.addContact(newContact);
 
     this.setState({
       name: '',
@@ -249,12 +256,13 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
   }
 }
 
-export const SimpleDialogWrapped = withStyles(styles)(AddContactModal);
+export const SimpleDialogWrapped = connect(null, mapDispatchToProps)(withStyles(styles)(AddContactModal));
 
 export interface AddContactModalProps {
   open: boolean;
   classes: any;
   onClose: any;
+  addContact: any;
 }
 
 export interface AddContactModalState {

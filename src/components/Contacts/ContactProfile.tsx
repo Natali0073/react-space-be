@@ -7,7 +7,7 @@ import Profile from '../../assets/images/profile.svg';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {AccountCircle, LocationOn, DateRange, Phone, Email, QueryBuilder, Textsms} from '@material-ui/icons';
 import {RouteComponentProps} from 'react-router';
-import {Contact} from '../../interfaces/contact';
+import {ContactsListDTO} from '../../interfaces/contact';
 
 const styles = {
   icon: {
@@ -21,7 +21,7 @@ class ContactProfile extends Component<ContactProfileProps, ContactProfileState>
     super(props);
     this.state = {
       contactId: this.props.match.params.id,
-      contact: {} as Contact,
+      contact: {} as ContactsListDTO,
       loading: true
     }
   }
@@ -129,6 +129,6 @@ export interface ContactProfileProps extends RouteComponentProps<any> {
 
 export interface ContactProfileState {
   contactId: string;
-  contact: Contact;
+  contact: ContactsListDTO;
   loading: boolean;
 }
