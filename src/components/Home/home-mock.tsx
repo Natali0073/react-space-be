@@ -29,3 +29,5 @@ export const homeData: PersonInfo = {
   sombraMoney: null,
   vacationDaysLeft: 1,
 };
+
+export const technologiesListMock: string[] = ['Angular', 'AngularJs'];

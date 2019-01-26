@@ -11,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import withStyles from '@material-ui/core/styles/withStyles';
 import createStyles from '@material-ui/core/styles/createStyles';
 import Button from '@material-ui/core/Button';
-import {addContact} from '../../actions';
+import {addContact} from '../../redux/actions';
 import {connect} from 'react-redux';
 import {ContactsListDTO} from '../../interfaces/contact';
 

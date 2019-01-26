@@ -31,6 +31,7 @@ const styles = ({palette}: Theme) => createStyles({
       },
     }
 );
+
 const mapStateToProps = (state: StateReducer) => {
   return { contactsList: state.contactsList };
 };
