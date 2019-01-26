@@ -7,6 +7,8 @@ import createStyles from '@material-ui/core/styles/createStyles';
 import {connect} from 'react-redux';
 import {ContactsListDTO} from '../../interfaces/contact';
 import {StateReducer} from '../../interfaces/state';
+import {getContacts} from '../../redux/actions';
+import Spinner from '../common/Spinner/Spinner';
 
 const styles = ({palette}: Theme) => createStyles({
       container: {
@@ -41,8 +43,17 @@ const columnsKeys: string[] = ['firstName', 'lastName', 'position', 'office', 'p
 
 class ContactsList extends Component<ContactsListProps, {}> {
 
+  componentDidMount() {
+    this.props.getContacts();
+  }
+
   render() {
     const {classes, contactsList} = this.props;
+    if (!contactsList.length) {
+      return (
+          <Spinner />
+      )
+    }
 
     return (
         <div className={classes.container}>
@@ -80,9 +91,10 @@ class ContactsList extends Component<ContactsListProps, {}> {
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(ContactsList));
+export default connect(mapStateToProps, { getContacts })(withStyles(styles)(ContactsList));
 
 export interface ContactsListProps {
   classes: any;
   contactsList: ContactsListDTO[];
+  getContacts: any;
 }

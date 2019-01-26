@@ -65,7 +65,7 @@ class Home extends Component<HomeProps, HomeState> {
 
     if (loading) {
       return (
-          <Spinner loading={loading}/>
+          <Spinner />
       )
     }
     return (

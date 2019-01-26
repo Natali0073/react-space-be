@@ -1,28 +1,34 @@
 import {Component} from 'react';
-import CircularProgress from '../../Home/Home';
 import React from 'react';
-import Fade from '@material-ui/core/Fade';
+import {CircularProgress} from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import createStyles from '@material-ui/core/styles/createStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
+
+const style = () => createStyles({
+  spinnerContainer: {
+    marginTop: 40
+  }
+});
 
 class Spinner extends Component<SpinnerProps, {}> {
 
   render() {
-    // return (
-    //     <Fade
-    //         in={this.props.loading}
-    //         style={{transitionDelay: this.props.loading ? '800ms' : '0ms',}}
-    //         unmountOnExit>
-    //       <CircularProgress />
-    //     </Fade>
-    // )
+    const {classes} = this.props;
     return (
-        <div>sfdsf</div>
+        <Grid container
+              justify="center"
+              alignItems="center"
+              className={classes.spinnerContainer}>
+          <CircularProgress/>
+        </Grid>
     )
   }
 
 }
 
-export default Spinner;
+export default withStyles(style)(Spinner);
 
 export interface SpinnerProps {
-  loading: boolean
+  classes: any;
 }

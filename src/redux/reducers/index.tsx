@@ -1,16 +1,27 @@
-import {contactsList} from '../../components/Contacts/contacts-list-mock';
-import {ADD_CONTACT, ADD_TECHNOLOGY, DELETE_TECHNOLOGY, INCORRECT_TECHNOLOGY} from '../../constants/action-types';
+import {
+  ADD_CONTACT,
+  ADD_TECHNOLOGY,
+  CONTACTS_LOADED,
+  DELETE_TECHNOLOGY,
+  INCORRECT_TECHNOLOGY
+} from '../../constants/action-types';
 import {technologiesListMock} from '../../components/Home/home-mock';
 import {Actions} from '../../interfaces/state';
 import {toast} from 'react-toastify';
 
 const initialState = {
-  contactsList: contactsList,
+  contactsList: [],
   technologiesList: technologiesListMock,
 };
+
 function rootReducer(state = initialState, action: Actions) {
   let toastId = 0;
   switch (action.type) {
+    case CONTACTS_LOADED:
+      return Object.assign({}, state, {
+        contactsList: state.contactsList.concat(action.payload)
+      });
+
     case ADD_CONTACT:
       return Object.assign({}, state, {
         contactsList: state.contactsList.concat(action.payload)
