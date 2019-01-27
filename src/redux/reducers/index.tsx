@@ -1,17 +1,18 @@
 import {
   ADD_CONTACT,
-  ADD_TECHNOLOGY,
+  ADD_TECHNOLOGY, CONTACT_BY_ID_LOADED,
   CONTACTS_LOADED,
   DELETE_TECHNOLOGY,
-  INCORRECT_TECHNOLOGY
+  INCORRECT_TECHNOLOGY, PERSON_INFO_LOADED, TECHNOLOGIES_LOADED
 } from '../../constants/action-types';
-import {technologiesListMock} from '../../components/Home/home-mock';
 import {Actions} from '../../interfaces/state';
 import {toast} from 'react-toastify';
 
 const initialState = {
   contactsList: [],
-  technologiesList: technologiesListMock,
+  contactById: null,
+  technologiesList: [],
+  personInfo: null,
 };
 
 function rootReducer(state = initialState, action: Actions) {
@@ -19,12 +20,28 @@ function rootReducer(state = initialState, action: Actions) {
   switch (action.type) {
     case CONTACTS_LOADED:
       return Object.assign({}, state, {
-        contactsList: state.contactsList.concat(action.payload)
+        contactsList: action.payload
       });
+
+    case CONTACT_BY_ID_LOADED:
+      return Object.assign({}, state, {
+        contactById: action.payload
+      });
+
 
     case ADD_CONTACT:
       return Object.assign({}, state, {
         contactsList: state.contactsList.concat(action.payload)
+      });
+
+    case PERSON_INFO_LOADED:
+      return Object.assign({}, state, {
+        personInfo: action.payload
+      });
+
+    case TECHNOLOGIES_LOADED:
+      return Object.assign({}, state, {
+        technologiesList: action.payload
       });
 
     case ADD_TECHNOLOGY:

@@ -1,9 +1,7 @@
 import {Component} from 'react';
 import React from 'react';
-import {CircularProgress} from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import createStyles from '@material-ui/core/styles/createStyles';
-import withStyles from '@material-ui/core/styles/withStyles';
+import {CircularProgress, Grid} from '@material-ui/core';
+import {createStyles, withStyles} from '@material-ui/core/styles';
 
 const style = () => createStyles({
   spinnerContainer: {

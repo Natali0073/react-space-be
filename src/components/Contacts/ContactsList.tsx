@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import withStyles from '@material-ui/core/styles/withStyles';
-import ArrowForward from '@material-ui/icons/ArrowForward';
+import {withStyles, createStyles} from '@material-ui/core/styles';
+import {ArrowForward} from '@material-ui/icons';
 import {Table, TableRow, TableCell, TableBody, TableHead, Theme} from '@material-ui/core';
 import {Link} from 'react-router-dom';
-import createStyles from '@material-ui/core/styles/createStyles';
 import {connect} from 'react-redux';
 import {ContactsListDTO} from '../../interfaces/contact';
 import {StateReducer} from '../../interfaces/state';

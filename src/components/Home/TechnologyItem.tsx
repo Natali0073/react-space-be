@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {ListItem} from '@material-ui/core';
+import {ListItem, IconButton} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
 
 class TechnologyItem extends Component<TechnologyItemProps, {}> {
 

@@ -9,5 +9,9 @@ export const checkTechnologyMiddleware: Middleware = store => (next: Dispatch) =
     }
   }
 
+  if (typeof action === "function") {
+    return action(store.dispatch, store.getState);
+  }
+
   return next(action);
 };

@@ -1,19 +1,22 @@
 import React, {Component, FormEvent} from 'react';
-import {Dialog, Theme} from '@material-ui/core';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import withStyles from '@material-ui/core/styles/withStyles';
-import createStyles from '@material-ui/core/styles/createStyles';
-import Button from '@material-ui/core/Button';
+import {
+  Theme,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  TextField,
+  Grid,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Button
+} from '@material-ui/core';
+import {withStyles, createStyles} from '@material-ui/core/styles';
 import {addContact} from '../../redux/actions';
 import {connect} from 'react-redux';
 import {ContactsListDTO} from '../../interfaces/contact';
+import {Dispatch} from 'redux';
 
 const styles = ({spacing}: Theme) => createStyles({
   formControl: {
@@ -28,11 +31,11 @@ const styles = ({spacing}: Theme) => createStyles({
   }
 });
 
-function mapDispatchToProps(dispatch: any) {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     addContact: (contact: ContactsListDTO) => dispatch(addContact(contact))
   };
-}
+};
 
 class AddContactModal extends Component<AddContactModalProps, AddContactModalState> {
   positions: string[] = [
@@ -267,6 +270,7 @@ export interface AddContactModalProps {
 
 export interface AddContactModalState {
   [name: string]: string;
+
   surname: string;
   email: string;
   personalEmail: string;

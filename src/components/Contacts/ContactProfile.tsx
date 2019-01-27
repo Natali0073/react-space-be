@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
 import './contact-profile.scss';
-import {contactsList} from './contacts-list-mock';
 import InfoTextField from '../common/InfoTextField/InfoTextField';
-import Grid from '@material-ui/core/Grid';
+import {Grid} from '@material-ui/core';
 import Profile from '../../assets/images/profile.svg';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {AccountCircle, LocationOn, DateRange, Phone, Email, QueryBuilder, Textsms} from '@material-ui/icons';
 import {RouteComponentProps} from 'react-router';
 import {ContactsListDTO} from '../../interfaces/contact';
+import {connect} from 'react-redux';
+import {getContactById} from '../../redux/actions';
+import {MyThunkDispatch, StateReducer} from '../../interfaces/state';
+import Spinner from '../common/Spinner/Spinner';
 
 const styles = {
   icon: {
@@ -15,33 +18,27 @@ const styles = {
   },
 };
 
-class ContactProfile extends Component<ContactProfileProps, ContactProfileState> {
+const mapStateToProps = (state: StateReducer) => {
+  return {contactById: state.contactById};
+};
 
-  constructor(props: ContactProfileProps) {
-    super(props);
-    this.state = {
-      contactId: this.props.match.params.id,
-      contact: {} as ContactsListDTO,
-      loading: true
-    }
-  }
+const mapDispatchToProps = (dispatch: MyThunkDispatch) => ({
+  getContactById: (id: number) => dispatch(getContactById(id))
+});
+
+class ContactProfile extends Component<ContactProfileProps, {}> {
 
   componentDidMount() {
-    let contacts = contactsList;
-    contacts = contacts.filter(el => el.id === +this.state.contactId);
-    this.setState({
-      contactId: this.props.match.params.id,
-      contact: contacts[0],
-      loading: false,
-    });
+    this.props.getContactById(+this.props.match.params.id);
   }
 
   render() {
     const {classes} = this.props;
-    const contact = this.state.contact;
-    if (this.state.loading) {
+    const contact = this.props.contactById;
+
+    if (!contact) {
       return (
-          <p>Loading...</p>
+          <Spinner/>
       )
     }
     return (
@@ -119,16 +116,13 @@ class ContactProfile extends Component<ContactProfileProps, ContactProfileState>
   }
 }
 
-export default withStyles(styles)(ContactProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ContactProfile));
 
 export interface ContactProfileProps extends RouteComponentProps<any> {
   classes: {
     icon: string;
   };
-}
-
-export interface ContactProfileState {
-  contactId: string;
+  getContactById: any;
   contact: ContactsListDTO;
-  loading: boolean;
+  contactById: ContactsListDTO;
 }

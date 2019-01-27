@@ -1,13 +1,9 @@
 import React, {Component, FormEvent} from 'react';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import {withStyles} from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import {Typography, TextField, Grid, Button} from '@material-ui/core';
+import {withStyles, createStyles} from '@material-ui/core/styles';
 import {toast} from 'react-toastify';
 import {Redirect} from 'react-router';
 import {Theme} from '@material-ui/core';
-import createStyles from '@material-ui/core/styles/createStyles';
 
 const styles = ({spacing}: Theme) => createStyles({
   container: {

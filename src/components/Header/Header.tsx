@@ -1,15 +1,6 @@
 import React, {Component} from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Home from '@material-ui/icons/Home';
-import People from '@material-ui/icons/People';
-import ArrowForward from '@material-ui/icons/ArrowForward';
-import PersonAdd from '@material-ui/icons/PersonAdd';
-import Grid from '@material-ui/core/Grid';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
+import {AppBar, Toolbar, BottomNavigation, BottomNavigationAction, Grid, Tooltip, IconButton} from '@material-ui/core';
+import {Home, People, ArrowForward, PersonAdd} from '@material-ui/icons';
 import {Link, withRouter} from 'react-router-dom';
 import './style.scss';
 import {RouteComponentProps} from 'react-router';

@@ -1,18 +1,13 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {addTechnology, deleteTechnology, getPersonData, getTechnologies} from '../../redux/actions';
+import {Grid, Button, List, TextField} from '@material-ui/core';
+import {withStyles, createStyles} from '@material-ui/core/styles/';
 import Profile from '../../assets/images/profile.svg';
-import {homeData} from './home-mock';
 import Spinner from '../common/Spinner/Spinner';
 import {PersonInfo} from '../../interfaces/personal-info';
-import {Grid} from '@material-ui/core';
-import withStyles from '@material-ui/core/styles/withStyles';
-import createStyles from '@material-ui/core/styles/createStyles';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
 import TechnologyItem from './TechnologyItem';
-import {connect} from 'react-redux';
-import {addTechnology, deleteTechnology} from '../../redux/actions';
-import {StateReducer} from '../../interfaces/state';
-import TextField from '@material-ui/core/TextField';
+import {MyThunkDispatch, StateReducer} from '../../interfaces/state';
 
 const styles = () => createStyles({
       homeContainer: {
@@ -25,29 +20,30 @@ const styles = () => createStyles({
     }
 );
 
-function mapDispatchToProps(dispatch: any) {
+const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
   return {
     addTechnology: (technology: string) => dispatch(addTechnology(technology)),
     deleteTechnology: (index: number) => dispatch(deleteTechnology(index)),
+    getPersonData: () => dispatch(getPersonData()),
+    getTechnologies: () => dispatch(getTechnologies()),
   };
-}
+};
 
 const mapStateToProps = (state: StateReducer) => {
-  return { technologiesList: state.technologiesList };
+  return {
+    personInfo: state.personInfo,
+    technologiesList: state.technologiesList,
+  };
 };
 
 class Home extends Component<HomeProps, HomeState> {
   state = {
-    personInfo: {} as PersonInfo,
-    loading: true,
     newTechnology: '',
   };
 
   componentDidMount() {
-    this.setState({
-      personInfo: homeData,
-      loading: false
-    })
+    this.props.getPersonData();
+    this.props.getTechnologies();
   }
 
   handleDelete = (index: number) => {
@@ -60,12 +56,11 @@ class Home extends Component<HomeProps, HomeState> {
   };
 
   render() {
-    const {classes, technologiesList} = this.props;
-    const {personInfo, loading} = this.state;
+    const {classes, technologiesList, personInfo} = this.props;
 
-    if (loading) {
+    if (!personInfo && !technologiesList.length) {
       return (
-          <Spinner />
+          <Spinner/>
       )
     }
     return (
@@ -113,7 +108,7 @@ class Home extends Component<HomeProps, HomeState> {
                       type="text"
                       fullWidth
                       value={this.state.newTechnology}
-                      onChange={(event) => this.setState({ newTechnology: event.target.value })}/>
+                      onChange={(event) => this.setState({newTechnology: event.target.value})}/>
 
                 </Grid>
                 <Grid item>
@@ -149,11 +144,12 @@ interface HomeProps {
   classes: any;
   deleteTechnology: any;
   addTechnology: any;
+  getPersonData: any;
+  getTechnologies: any;
+  personInfo: PersonInfo;
   technologiesList: string[];
 }
 
 interface HomeState {
-  personInfo: PersonInfo;
-  loading: boolean;
   newTechnology: string;
 }
