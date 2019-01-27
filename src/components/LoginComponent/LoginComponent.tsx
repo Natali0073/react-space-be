@@ -1,4 +1,4 @@
-import React, {Component, FormEvent} from 'react';
+import React, {BaseSyntheticEvent, Component, FormEvent} from 'react';
 import {Typography, TextField, Grid, Button} from '@material-ui/core';
 import {withStyles, createStyles} from '@material-ui/core/styles';
 import {toast} from 'react-toastify';
@@ -25,7 +25,7 @@ const styles = ({spacing}: Theme) => createStyles({
 class LoginComponent extends Component<LoginComponentProps, LoginComponentState> {
   toastId = 0;
 
-  constructor(props: any) {
+  constructor(props: LoginComponentProps) {
     super(props);
     this.state = {
       email: '',
@@ -38,7 +38,7 @@ class LoginComponent extends Component<LoginComponentProps, LoginComponentState>
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
 
-  handleChange = (name: string) => (event: any) => {
+  handleChange = (name: string) => (event: BaseSyntheticEvent) => {
     this.setState({
       [name]: event.target.value,
     })
@@ -117,6 +117,5 @@ export interface LoginComponentState {
   email: string;
   password: string;
   redirectMe?: boolean;
-
-  [x: string]: any;
+  [key: string]: string | boolean | undefined;
 }

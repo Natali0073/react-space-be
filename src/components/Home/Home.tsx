@@ -141,13 +141,18 @@ class Home extends Component<HomeProps, HomeState> {
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Home));
 
 interface HomeProps {
-  classes: any;
+  classes: HomeClasses;
   deleteTechnology: any;
   addTechnology: any;
   getPersonData: any;
   getTechnologies: any;
   personInfo: PersonInfo;
   technologiesList: string[];
+}
+
+interface HomeClasses {
+  homeContainer: string;
+  infoContainer: string;
 }
 
 interface HomeState {

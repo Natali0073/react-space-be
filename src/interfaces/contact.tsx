@@ -7,7 +7,8 @@ export interface ContactsListDTO {
   office: string;
   personalEmail: string;
   phoneOne: string;
-  phoneTwo: string | null,
+  phoneTwo: string | null;
   position: string;
   skype: string;
+  [key: string]: string | null | number | undefined;
 }

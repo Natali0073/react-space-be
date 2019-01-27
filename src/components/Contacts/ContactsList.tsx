@@ -67,7 +67,7 @@ class ContactsList extends Component<ContactsListProps, {}> {
               </TableRow>
             </TableHead>
             <TableBody>
-              {contactsList.map((el: any, index) => {
+              {contactsList.map((el, index) => {
                 return (
                     <TableRow className={[classes.row, classes.tableRowHover].join(' ')} key={index}>
                       <TableCell>{index + 1}</TableCell>

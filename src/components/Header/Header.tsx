@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {ChangeEvent, Component} from 'react';
 import {AppBar, Toolbar, BottomNavigation, BottomNavigationAction, Grid, Tooltip, IconButton} from '@material-ui/core';
 import {Home, People, ArrowForward, PersonAdd} from '@material-ui/icons';
 import {Link, withRouter} from 'react-router-dom';
@@ -7,18 +7,19 @@ import {RouteComponentProps} from 'react-router';
 import {SimpleDialogWrapped} from '../Contacts/AddContactModal';
 
 class Header extends Component<RouteComponentProps, HeaderState> {
+  public selectedTab: number;
+
   constructor(props: RouteComponentProps) {
     super(props);
-
     this.state = {
-      value: ['/', '/home'].includes(this.props.location.pathname) ? 0 : 1,
       open: false
     };
+    this.selectedTab = 0;
   }
 
-  handleChangeRouting = (event: object, value: number) => {
-    this.setState({value});
+  handleChangeRouting = (event: ChangeEvent<{}>, value: number) => {
     const route = value === 0 ? '/home' : '/contacts';
+    this.selectedTab = value;
     this.props.history.push(route);
   };
 
@@ -37,9 +38,12 @@ class Header extends Component<RouteComponentProps, HeaderState> {
   };
 
   render() {
-    if (this.props.location.pathname === '/login') {
+    this.selectedTab = ['/', '/home'].includes(this.props.location.pathname) ? 0 : 1;
+
+    if (['/login', '/not-found'].includes(this.props.location.pathname)) {
       return null;
     }
+
     return (
         <AppBar position="static" color="default">
           <Toolbar>
@@ -49,7 +53,7 @@ class Header extends Component<RouteComponentProps, HeaderState> {
               <Grid item xs>
                 <BottomNavigation
                     className="navigation"
-                    value={this.state.value}
+                    value={this.selectedTab}
                     onChange={this.handleChangeRouting}
                     showLabels={true}>
                   <BottomNavigationAction
@@ -61,7 +65,7 @@ class Header extends Component<RouteComponentProps, HeaderState> {
                 </BottomNavigation>
               </Grid>
               <Grid item>
-                {this.state.value === 1 ?
+                {this.selectedTab === 1 ?
                     <Tooltip title="Add contact">
                       <IconButton aria-label="Add contact" onClick={this.handleAddContact}>
                         <PersonAdd/>
@@ -85,6 +89,5 @@ class Header extends Component<RouteComponentProps, HeaderState> {
 export default withRouter(Header);
 
 export interface HeaderState {
-  value: number;
   open: boolean;
 }

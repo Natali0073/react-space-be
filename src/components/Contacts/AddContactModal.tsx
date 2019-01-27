@@ -1,4 +1,4 @@
-import React, {Component, FormEvent} from 'react';
+import React, {BaseSyntheticEvent, Component, FormEvent} from 'react';
 import {
   Theme,
   Dialog,
@@ -63,7 +63,7 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
     this.props.onClose();
   };
 
-  handleChange = (name: string) => (event: any) => {
+  handleChange = (name: string) => (event: BaseSyntheticEvent) => {
     this.setState({
       [name]: event.target.value,
     })
@@ -261,16 +261,20 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
 
 export const SimpleDialogWrapped = connect(null, mapDispatchToProps)(withStyles(styles)(AddContactModal));
 
-export interface AddContactModalProps {
+interface AddContactModalProps {
   open: boolean;
-  classes: any;
+  classes: AddContactModalClasses;
   onClose: any;
   addContact: any;
 }
 
-export interface AddContactModalState {
-  [name: string]: string;
+interface AddContactModalClasses {
+  formControl: string;
+  selectFormControl: string;
+}
 
+interface AddContactModalState {
+  name: string;
   surname: string;
   email: string;
   personalEmail: string;
@@ -280,4 +284,5 @@ export interface AddContactModalState {
   phoneTwo: string;
   skype: string;
   birthDate: string;
+  [key: string]: string;
 }

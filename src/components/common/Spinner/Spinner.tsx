@@ -27,6 +27,10 @@ class Spinner extends Component<SpinnerProps, {}> {
 
 export default withStyles(style)(Spinner);
 
-export interface SpinnerProps {
-  classes: any;
+interface SpinnerProps {
+  classes: SpinnerClasses;
+}
+
+interface SpinnerClasses {
+  spinnerContainer: string;
 }

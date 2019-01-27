@@ -33,7 +33,7 @@ class InfoTextField extends Component<InfoTextFieldProps, {}> {
 
 export default InfoTextField;
 
-export interface InfoTextFieldProps {
+interface InfoTextFieldProps {
   label: string;
   value: string | null;
   placeholder?: string;

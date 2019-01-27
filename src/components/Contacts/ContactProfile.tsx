@@ -118,11 +118,13 @@ class ContactProfile extends Component<ContactProfileProps, {}> {
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ContactProfile));
 
-export interface ContactProfileProps extends RouteComponentProps<any> {
-  classes: {
-    icon: string;
-  };
+interface ContactProfileProps extends RouteComponentProps<any> {
+  classes: ContactProfileClasses;
   getContactById: any;
   contact: ContactsListDTO;
   contactById: ContactsListDTO;
+}
+
+interface ContactProfileClasses {
+  icon: string;
 }
