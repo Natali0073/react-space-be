@@ -8,8 +8,8 @@ class TechnologyItem extends Component<TechnologyItemProps, {}> {
   render() {
     return (
         <ListItem>
-          {this.props.index + 1}. {this.props.item}
-          <IconButton aria-label="Delete" onClick={() => this.props.handleDelete(this.props.index)}>
+          {this.props.index + 1}. {this.props.item.name}
+          <IconButton aria-label="Delete" onClick={() => this.props.handleDelete(this.props.item.id)}>
             <DeleteIcon fontSize="small"/>
           </IconButton>
         </ListItem>

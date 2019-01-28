@@ -46,12 +46,17 @@ class Home extends Component<HomeProps, HomeState> {
     this.props.getTechnologies();
   }
 
-  handleDelete = (index: number) => {
-    this.props.deleteTechnology(index);
+  handleDelete = (id: number) => {
+    this.props.deleteTechnology(id);
   };
 
   handleAdd = () => {
-    this.props.addTechnology(this.state.newTechnology);
+    const lastItem = this.props.technologiesList[this.props.technologiesList.length - 1].id + 1;
+    const newTechnology = {
+      id: lastItem,
+      name: this.state.newTechnology
+    };
+    this.props.addTechnology(newTechnology);
     this.setState({newTechnology: ''});
   };
 

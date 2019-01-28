@@ -5,8 +5,9 @@ import {
   DELETE_TECHNOLOGY,
   INCORRECT_TECHNOLOGY, PERSON_INFO_LOADED, POSTS_BY_ID_LOADED, POSTS_LOADED, TECHNOLOGIES_LOADED
 } from '../../constants/action-types';
-import {Actions} from '../../interfaces/state';
-import {toast} from 'react-toastify';
+import { Actions } from '../../interfaces/state';
+import { toast } from 'react-toastify';
+import { TechnologiesListDTO } from '../../interfaces/personal-info';
 
 const initialState = {
   contactsList: [],
@@ -33,7 +34,7 @@ function rootReducer(state = initialState, action: Actions) {
 
     case ADD_CONTACT:
       return Object.assign({}, state, {
-        contactsList: state.contactsList.concat(action.payload)
+        contactsList: action.payload
       });
 
     case PERSON_INFO_LOADED:
@@ -52,8 +53,7 @@ function rootReducer(state = initialState, action: Actions) {
       });
 
     case DELETE_TECHNOLOGY:
-      const technologiesListCopy = state.technologiesList.slice();
-      technologiesListCopy.splice(action.payload, 1);
+      const technologiesListCopy = state.technologiesList.filter((el: TechnologiesListDTO) => el.id !== action.payload);
       return Object.assign({}, state, {
         technologiesList: technologiesListCopy
       });

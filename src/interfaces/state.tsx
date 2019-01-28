@@ -1,12 +1,12 @@
 import {ContactsListDTO} from './contact';
 import {ThunkDispatch} from 'redux-thunk';
 import {Action} from 'redux';
-import {PersonInfo} from './personal-info';
+import { PersonInfo, TechnologiesListDTO } from './personal-info';
 import { PostsListDTO } from './posts';
 
 export interface StateReducer {
   contactsList: ContactsListDTO[];
-  technologiesList: string[];
+  technologiesList: TechnologiesListDTO[];
   contactById: ContactsListDTO;
   personInfo: PersonInfo;
   posts: PostsListDTO[];

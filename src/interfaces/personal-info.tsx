@@ -24,3 +24,8 @@ export interface Role {
   id: number;
   roleType: string;
 }
+
+export interface TechnologiesListDTO {
+  id: number;
+  name: string;
+}

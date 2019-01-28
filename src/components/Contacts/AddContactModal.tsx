@@ -16,8 +16,8 @@ import {withStyles, createStyles} from '@material-ui/core/styles';
 import {addContact} from '../../redux/actions';
 import {connect} from 'react-redux';
 import {ContactsListDTO} from '../../interfaces/contact';
-import {Dispatch} from 'redux';
 import { AddContactModalProps, AddContactModalState } from './contacts-interfaces/AddContactModalStateProps';
+import { MyThunkDispatch } from '../../interfaces/state';
 
 const styles = ({spacing}: Theme) => createStyles({
   formControl: {
@@ -32,9 +32,9 @@ const styles = ({spacing}: Theme) => createStyles({
   }
 });
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: MyThunkDispatch) => {
   return {
-    addContact: (contact: ContactsListDTO) => dispatch(addContact(contact))
+    addContact: (contact: ContactsListDTO) => dispatch(addContact(contact)),
   };
 };
 

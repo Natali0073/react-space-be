@@ -1,4 +1,4 @@
-import { PersonInfo } from '../../../interfaces/personal-info';
+import { PersonInfo, TechnologiesListDTO } from '../../../interfaces/personal-info';
 export interface HomeProps {
   classes: HomeClasses;
   deleteTechnology: any;
@@ -6,7 +6,7 @@ export interface HomeProps {
   getPersonData: any;
   getTechnologies: any;
   personInfo: PersonInfo;
-  technologiesList: string[];
+  technologiesList: TechnologiesListDTO[];
 }
 
 interface HomeClasses {

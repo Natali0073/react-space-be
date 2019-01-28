@@ -5,16 +5,14 @@ import {
   DELETE_TECHNOLOGY, PERSON_INFO_LOADED, POSTS_BY_ID_LOADED, POSTS_LOADED,
   TECHNOLOGIES_LOADED
 } from '../../constants/action-types';
-import {ContactsListDTO} from '../../interfaces/contact';
-import {Dispatch} from 'redux';
-import {contactsList} from '../../components/Contacts/contacts-list-mock';
-import {homeData, technologiesListMock} from '../../components/Home/home-mock';
-import {toast} from 'react-toastify';
+import { ContactsListDTO } from '../../interfaces/contact';
+import { Dispatch } from 'redux';
+import { toast } from 'react-toastify';
 import { PostsListDTO } from '../../interfaces/posts';
+import { PersonInfo, TechnologiesListDTO } from '../../interfaces/personal-info';
 
-export const addContact = (payload: ContactsListDTO) =>{
-  return {type: ADD_CONTACT, payload}
-};
+const requestHeaders = new Headers();
+requestHeaders.append('Content-Type', 'application/json');
 
 export const addTechnology = (payload: string) => {
   return {type: ADD_TECHNOLOGY, payload}
@@ -25,106 +23,90 @@ export const deleteTechnology = (payload: number) => {
 };
 
 export const getContacts = () => {
-  let promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(contactsList);
-      reject(new Error('Could not load the data'));
-    }, 1000);
-
-  });
-
   return (dispatch: Dispatch) => {
-    promise
-        .then(
-            result => {
-              dispatch({type: CONTACTS_LOADED, payload: result});
+    return fetch('/api/contacts', {method: 'GET'})
+            .then(response => response.json())
+            .then((json: ContactsListDTO[]) => {
+              dispatch({type: CONTACTS_LOADED, payload: json});
             }, error => {
               toast.error(error.message);
-            }
-        );
-  }
+            });
+  };
 };
 
 export const getContactById = (id: number) => {
-  const contacts = contactsList.filter(el => el.id === id);
-  let promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(contacts[0]);
-      reject(new Error('Could not load the data'));
-    }, 1000);
-
-  });
-
   return (dispatch: Dispatch) => {
-    promise
-        .then(
-            result => {
-              console.log('dispatch', CONTACT_BY_ID_LOADED);
-              dispatch({type: CONTACT_BY_ID_LOADED, payload: result});
+    return fetch(`/api/contacts/${id}`)
+            .then(response => response.json())
+            .then((json: ContactsListDTO[]) => {
+              dispatch({type: CONTACT_BY_ID_LOADED, payload: json});
             }, error => {
               toast.error(error.message);
-            }
-        );
-  }
+            });
+  };
+};
+
+export const addContact = (newContact: ContactsListDTO) => {
+  return (dispatch: Dispatch) => {
+    return fetch('/api/contacts', {
+      headers: requestHeaders,
+      method: 'POST',
+      body: JSON.stringify(newContact)
+    })
+            .then(response => response.json())
+            .then((json: ContactsListDTO[]) => {
+              dispatch({type: ADD_CONTACT, payload: json});
+            }, error => {
+              toast.error(error.message);
+            });
+  };
+
 };
 
 export const getPersonData = () => {
-  let promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(homeData);
-      reject(new Error('Could not load the data'));
-    }, 1000);
-  });
-
   return (dispatch: Dispatch) => {
-    promise
-        .then(
-            result => {
-              dispatch({type: PERSON_INFO_LOADED, payload: result});
+    return fetch('/api/person-info')
+            .then(response => response.json())
+            .then((json: PersonInfo) => {
+              dispatch({type: PERSON_INFO_LOADED, payload: json});
             }, error => {
               toast.error(error.message);
-            }
-        );
+            });
   }
 };
 
 export const getTechnologies = () => {
-  let promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(technologiesListMock);
-      reject(new Error('Could not load the data'));
-    }, 1000);
-  });
-
   return (dispatch: Dispatch) => {
-    promise
-        .then(
-            result => {
-              dispatch({type: TECHNOLOGIES_LOADED, payload: result});
+    return fetch('/api/person-technologies', {method: 'Get'})
+            .then(response => response.json())
+            .then((json: TechnologiesListDTO[]) => {
+              dispatch({type: TECHNOLOGIES_LOADED, payload: json});
             }, error => {
               toast.error(error.message);
-            }
-        );
-  }
+            });
+  };
 };
 
 export const getPosts = () => {
-  return (dispatch: Dispatch) =>{
-    return fetch("https://jsonplaceholder.typicode.com/posts")
+  return (dispatch: Dispatch) => {
+    return fetch('/api/posts')
             .then(response => response.json())
             .then((json: PostsListDTO[]) => {
-              dispatch({ type: POSTS_LOADED, payload: json });
+              dispatch({type: POSTS_LOADED, payload: json});
+            }, error => {
+              toast.error(error.message);
             });
   };
 };
 
 export const getPostById = (id: number) => {
-  return (dispatch: Dispatch) =>{
-    return fetch("https://jsonplaceholder.typicode.com/posts")
+  return (dispatch: Dispatch) => {
+    return fetch(`/api/posts/${id}`)
             .then(response => response.json())
             .then((json: PostsListDTO[]) => {
-              const item = json.filter(el => el.id === id);
-              dispatch({ type: POSTS_BY_ID_LOADED, payload: item[0] });
+              dispatch({type: POSTS_BY_ID_LOADED, payload: json});
+            }, error => {
+              toast.error(error.message);
             });
   };
 };

@@ -1,5 +1,6 @@
+import { TechnologiesListDTO } from '../../../interfaces/personal-info';
 export interface TechnologyItemProps {
-  item: string;
+  item: TechnologiesListDTO;
   index: number;
   handleDelete: any;
 }
