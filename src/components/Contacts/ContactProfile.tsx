@@ -5,12 +5,11 @@ import {Grid} from '@material-ui/core';
 import Profile from '../../assets/images/profile.svg';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {AccountCircle, LocationOn, DateRange, Phone, Email, QueryBuilder, Textsms} from '@material-ui/icons';
-import {RouteComponentProps} from 'react-router';
-import {ContactsListDTO} from '../../interfaces/contact';
 import {connect} from 'react-redux';
 import {getContactById} from '../../redux/actions';
 import {MyThunkDispatch, StateReducer} from '../../interfaces/state';
 import Spinner from '../common/Spinner/Spinner';
+import { ContactProfileProps } from './contacts-interfaces/ContactProfileStateProps';
 
 const styles = {
   icon: {
@@ -117,14 +116,3 @@ class ContactProfile extends Component<ContactProfileProps, {}> {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ContactProfile));
-
-interface ContactProfileProps extends RouteComponentProps<any> {
-  classes: ContactProfileClasses;
-  getContactById: any;
-  contact: ContactsListDTO;
-  contactById: ContactsListDTO;
-}
-
-interface ContactProfileClasses {
-  icon: string;
-}

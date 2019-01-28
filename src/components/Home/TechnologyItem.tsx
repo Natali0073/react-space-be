@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {ListItem, IconButton} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { TechnologyItemProps } from './home-interfaces/TechnologyItem';
 
 class TechnologyItem extends Component<TechnologyItemProps, {}> {
 
@@ -17,9 +18,3 @@ class TechnologyItem extends Component<TechnologyItemProps, {}> {
 }
 
 export default TechnologyItem;
-
-interface TechnologyItemProps {
-  item: string;
-  index: number;
-  handleDelete: any;
-}

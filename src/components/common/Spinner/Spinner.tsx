@@ -2,6 +2,7 @@ import {Component} from 'react';
 import React from 'react';
 import {CircularProgress, Grid} from '@material-ui/core';
 import {createStyles, withStyles} from '@material-ui/core/styles';
+import { SpinnerProps } from '../common-interfaces/SpinnerStateProps';
 
 const style = () => createStyles({
   spinnerContainer: {
@@ -26,11 +27,3 @@ class Spinner extends Component<SpinnerProps, {}> {
 }
 
 export default withStyles(style)(Spinner);
-
-interface SpinnerProps {
-  classes: SpinnerClasses;
-}
-
-interface SpinnerClasses {
-  spinnerContainer: string;
-}

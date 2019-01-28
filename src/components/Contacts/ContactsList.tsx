@@ -4,10 +4,10 @@ import {ArrowForward} from '@material-ui/icons';
 import {Table, TableRow, TableCell, TableBody, TableHead, Theme} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {ContactsListDTO} from '../../interfaces/contact';
 import {StateReducer} from '../../interfaces/state';
 import {getContacts} from '../../redux/actions';
 import Spinner from '../common/Spinner/Spinner';
+import { ContactsListProps } from './contacts-interfaces/ContactsListStateProps';
 
 const styles = ({palette}: Theme) => createStyles({
       container: {
@@ -59,11 +59,7 @@ class ContactsList extends Component<ContactsListProps, {}> {
           <Table>
             <TableHead>
               <TableRow className={classes.headerRow}>
-                {columnsNames.map(el => {
-                  return (
-                      <TableCell key={el}>{el}</TableCell>
-                  )
-                })}
+                {columnsNames.map(el => <TableCell key={el}>{el}</TableCell>)}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -71,11 +67,7 @@ class ContactsList extends Component<ContactsListProps, {}> {
                 return (
                     <TableRow className={[classes.row, classes.tableRowHover].join(' ')} key={index}>
                       <TableCell>{index + 1}</TableCell>
-                      {columnsKeys.map(key => {
-                        return (
-                            <TableCell key={key}>{el[key]}</TableCell>
-                        )
-                      })}
+                      {columnsKeys.map(key => <TableCell key={key}>{el[key]}</TableCell>)}
                       <TableCell>
                         <Link to={`/contacts/${el.id}`} className={classes.linkColumn}><ArrowForward/></Link>
                       </TableCell>
@@ -92,8 +84,3 @@ class ContactsList extends Component<ContactsListProps, {}> {
 
 export default connect(mapStateToProps, { getContacts })(withStyles(styles)(ContactsList));
 
-export interface ContactsListProps {
-  classes: any;
-  contactsList: ContactsListDTO[];
-  getContacts: any;
-}

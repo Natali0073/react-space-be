@@ -3,7 +3,7 @@ import {
   ADD_TECHNOLOGY, CONTACT_BY_ID_LOADED,
   CONTACTS_LOADED,
   DELETE_TECHNOLOGY,
-  INCORRECT_TECHNOLOGY, PERSON_INFO_LOADED, TECHNOLOGIES_LOADED
+  INCORRECT_TECHNOLOGY, PERSON_INFO_LOADED, POSTS_BY_ID_LOADED, POSTS_LOADED, TECHNOLOGIES_LOADED
 } from '../../constants/action-types';
 import {Actions} from '../../interfaces/state';
 import {toast} from 'react-toastify';
@@ -13,6 +13,8 @@ const initialState = {
   contactById: null,
   technologiesList: [],
   personInfo: null,
+  posts: [],
+  postById: null,
 };
 
 function rootReducer(state = initialState, action: Actions) {
@@ -60,6 +62,16 @@ function rootReducer(state = initialState, action: Actions) {
       if (!toast.isActive(toastId)) {
         toastId = toast.error(`Technology name is incorrect. Use only letters, numbers and special symbols: - ' space`);
       }
+
+    case POSTS_LOADED:
+      return Object.assign({}, state, {
+        posts: action.payload
+      });
+
+    case POSTS_BY_ID_LOADED:
+      return Object.assign({}, state, {
+        postById: action.payload
+      });
 
     default:
       return state;

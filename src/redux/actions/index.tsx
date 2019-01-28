@@ -2,7 +2,7 @@ import {
   ADD_CONTACT,
   ADD_TECHNOLOGY, CONTACT_BY_ID_LOADED,
   CONTACTS_LOADED,
-  DELETE_TECHNOLOGY, PERSON_INFO_LOADED,
+  DELETE_TECHNOLOGY, PERSON_INFO_LOADED, POSTS_BY_ID_LOADED, POSTS_LOADED,
   TECHNOLOGIES_LOADED
 } from '../../constants/action-types';
 import {ContactsListDTO} from '../../interfaces/contact';
@@ -10,6 +10,7 @@ import {Dispatch} from 'redux';
 import {contactsList} from '../../components/Contacts/contacts-list-mock';
 import {homeData, technologiesListMock} from '../../components/Home/home-mock';
 import {toast} from 'react-toastify';
+import { PostsListDTO } from '../../interfaces/posts';
 
 export const addContact = (payload: ContactsListDTO) =>{
   return {type: ADD_CONTACT, payload}
@@ -105,4 +106,25 @@ export const getTechnologies = () => {
             }
         );
   }
+};
+
+export const getPosts = () => {
+  return (dispatch: Dispatch) =>{
+    return fetch("https://jsonplaceholder.typicode.com/posts")
+            .then(response => response.json())
+            .then((json: PostsListDTO[]) => {
+              dispatch({ type: POSTS_LOADED, payload: json });
+            });
+  };
+};
+
+export const getPostById = (id: number) => {
+  return (dispatch: Dispatch) =>{
+    return fetch("https://jsonplaceholder.typicode.com/posts")
+            .then(response => response.json())
+            .then((json: PostsListDTO[]) => {
+              const item = json.filter(el => el.id === id);
+              dispatch({ type: POSTS_BY_ID_LOADED, payload: item[0] });
+            });
+  };
 };

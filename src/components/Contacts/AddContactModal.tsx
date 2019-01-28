@@ -17,6 +17,7 @@ import {addContact} from '../../redux/actions';
 import {connect} from 'react-redux';
 import {ContactsListDTO} from '../../interfaces/contact';
 import {Dispatch} from 'redux';
+import { AddContactModalProps, AddContactModalState } from './contacts-interfaces/AddContactModalStateProps';
 
 const styles = ({spacing}: Theme) => createStyles({
   formControl: {
@@ -261,28 +262,4 @@ class AddContactModal extends Component<AddContactModalProps, AddContactModalSta
 
 export const SimpleDialogWrapped = connect(null, mapDispatchToProps)(withStyles(styles)(AddContactModal));
 
-interface AddContactModalProps {
-  open: boolean;
-  classes: AddContactModalClasses;
-  onClose: any;
-  addContact: any;
-}
 
-interface AddContactModalClasses {
-  formControl: string;
-  selectFormControl: string;
-}
-
-interface AddContactModalState {
-  name: string;
-  surname: string;
-  email: string;
-  personalEmail: string;
-  position: string;
-  office: string;
-  phoneOne: string;
-  phoneTwo: string;
-  skype: string;
-  birthDate: string;
-  [key: string]: string;
-}

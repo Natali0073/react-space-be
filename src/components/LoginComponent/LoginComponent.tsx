@@ -4,6 +4,7 @@ import {withStyles, createStyles} from '@material-ui/core/styles';
 import {toast} from 'react-toastify';
 import {Redirect} from 'react-router';
 import {Theme} from '@material-ui/core';
+import { LoginComponentProps, LoginComponentState } from './login-interfaces/LoginStateProps';
 
 const styles = ({spacing}: Theme) => createStyles({
   container: {
@@ -108,14 +109,3 @@ class LoginComponent extends Component<LoginComponentProps, LoginComponentState>
 }
 
 export default withStyles(styles)(LoginComponent);
-
-export interface LoginComponentProps {
-  classes: any;
-}
-
-export interface LoginComponentState {
-  email: string;
-  password: string;
-  redirectMe?: boolean;
-  [key: string]: string | boolean | undefined;
-}

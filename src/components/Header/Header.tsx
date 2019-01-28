@@ -5,6 +5,7 @@ import {Link, withRouter} from 'react-router-dom';
 import './style.scss';
 import {RouteComponentProps} from 'react-router';
 import {SimpleDialogWrapped} from '../Contacts/AddContactModal';
+import { HeaderState } from './header-interfaces/HeaderStateProps';
 
 class Header extends Component<RouteComponentProps, HeaderState> {
   public selectedTab: number;
@@ -18,7 +19,20 @@ class Header extends Component<RouteComponentProps, HeaderState> {
   }
 
   handleChangeRouting = (event: ChangeEvent<{}>, value: number) => {
-    const route = value === 0 ? '/home' : '/contacts';
+    let route = '';
+    switch (value) {
+      case 0:
+        route = '/home';
+        break;
+      case 1:
+        route = '/contacts';
+        break;
+      case 2:
+        route = '/posts';
+        break;
+
+    }
+   
     this.selectedTab = value;
     this.props.history.push(route);
   };
@@ -38,7 +52,21 @@ class Header extends Component<RouteComponentProps, HeaderState> {
   };
 
   render() {
-    this.selectedTab = ['/', '/home'].includes(this.props.location.pathname) ? 0 : 1;
+    switch (this.props.location.pathname) {
+      case '/':
+        this.selectedTab = 0;
+        break;
+      case '/home':
+        this.selectedTab = 0;
+        break;
+      case '/contacts':
+        this.selectedTab = 1;
+        break;
+      case '/posts':
+        this.selectedTab = 2;
+        break;
+
+    }
 
     if (['/login', '/not-found'].includes(this.props.location.pathname)) {
       return null;
@@ -62,6 +90,9 @@ class Header extends Component<RouteComponentProps, HeaderState> {
                   <BottomNavigationAction
                       label="Contacts"
                       icon={<People/>}/>
+                  <BottomNavigationAction
+                          label="Posts"
+                          icon={<People/>}/>
                 </BottomNavigation>
               </Grid>
               <Grid item>
@@ -87,7 +118,3 @@ class Header extends Component<RouteComponentProps, HeaderState> {
 }
 
 export default withRouter(Header);
-
-export interface HeaderState {
-  open: boolean;
-}

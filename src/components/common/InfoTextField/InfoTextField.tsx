@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './infro-text-field.scss';
 import {FormControl, InputAdornment, TextField} from '@material-ui/core';
+import { InfoTextFieldProps } from '../common-interfaces/InfoTextFieldStateProps';
 
 class InfoTextField extends Component<InfoTextFieldProps, {}> {
 
@@ -32,9 +33,3 @@ class InfoTextField extends Component<InfoTextFieldProps, {}> {
 }
 
 export default InfoTextField;
-
-interface InfoTextFieldProps {
-  label: string;
-  value: string | null;
-  placeholder?: string;
-}

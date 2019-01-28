@@ -5,9 +5,9 @@ import {Grid, Button, List, TextField} from '@material-ui/core';
 import {withStyles, createStyles} from '@material-ui/core/styles/';
 import Profile from '../../assets/images/profile.svg';
 import Spinner from '../common/Spinner/Spinner';
-import {PersonInfo} from '../../interfaces/personal-info';
 import TechnologyItem from './TechnologyItem';
 import {MyThunkDispatch, StateReducer} from '../../interfaces/state';
+import { HomeProps, HomeState } from './home-interfaces/HomeStateProps';
 
 const styles = () => createStyles({
       homeContainer: {
@@ -139,22 +139,3 @@ class Home extends Component<HomeProps, HomeState> {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Home));
-
-interface HomeProps {
-  classes: HomeClasses;
-  deleteTechnology: any;
-  addTechnology: any;
-  getPersonData: any;
-  getTechnologies: any;
-  personInfo: PersonInfo;
-  technologiesList: string[];
-}
-
-interface HomeClasses {
-  homeContainer: string;
-  infoContainer: string;
-}
-
-interface HomeState {
-  newTechnology: string;
-}
