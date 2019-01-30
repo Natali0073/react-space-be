@@ -9,7 +9,7 @@ export interface HomeProps {
   technologiesList: TechnologiesListDTO[];
 }
 
-interface HomeClasses {
+export interface HomeClasses {
   homeContainer: string;
   infoContainer: string;
 }

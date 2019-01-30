@@ -1,4 +1,4 @@
-import {PersonInfo} from '../../interfaces/personal-info';
+import { PersonInfo, TechnologiesListDTO } from '../../interfaces/personal-info';
 
 export const homeData: PersonInfo = {
   id: 90,
@@ -30,4 +30,13 @@ export const homeData: PersonInfo = {
   vacationDaysLeft: 1,
 };
 
-export const technologiesListMock: string[] = ['Angular', 'AngularJs'];
+export const technologiesListMock: TechnologiesListDTO[] = [
+  {
+    id: 1,
+    name: 'Angular'
+  },
+  {
+    id: 2,
+    name: 'AngularJs'
+  }
+];

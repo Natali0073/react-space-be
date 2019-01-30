@@ -9,7 +9,7 @@ import { Actions } from '../../interfaces/state';
 import { toast } from 'react-toastify';
 import { TechnologiesListDTO } from '../../interfaces/personal-info';
 
-const initialState = {
+export const initialState = {
   contactsList: [],
   contactById: null,
   technologiesList: [],

@@ -34,12 +34,26 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
     "@types/react-redux": "^7.0.0",
     "awesome-typescript-loader": "^5.2.1",
+    "babel-jest": "23.6.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.8.0",
+    "enzyme-to-json": "^3.3.5",
+    "fetch-mock": "^7.3.0",
+    "jest": "23.6.0",
+    "moxios": "^0.4.0",
     "react-redux": "^6.0.0",
+    "react-test-renderer": "^16.7.0",
     "redux": "^4.0.1",
+    "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
     "source-map-loader": "^0.2.4",
     "typescript": "^3.2.2"
+  },
+  "jest": {
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   }
 }

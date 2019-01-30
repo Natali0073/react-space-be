@@ -77,7 +77,7 @@ export const getPersonData = () => {
 
 export const getTechnologies = () => {
   return (dispatch: Dispatch) => {
-    return fetch('/api/person-technologies', {method: 'Get'})
+    return fetch('/api/person-technologies')
             .then(response => response.json())
             .then((json: TechnologiesListDTO[]) => {
               dispatch({type: TECHNOLOGIES_LOADED, payload: json});
