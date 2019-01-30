@@ -3,17 +3,16 @@ import {
   ADD_TECHNOLOGY, DELETE_TECHNOLOGY, PERSON_INFO_LOADED,
   TECHNOLOGIES_LOADED
 } from '../../constants/action-types';
-import { addTechnology, deleteTechnology, getPersonData, getTechnologies } from '../../redux/actions/index';
+import {addTechnology, deleteTechnology, getPersonData, getTechnologies} from '../../redux/actions/index';
 import fetchMock from 'fetch-mock';
 import expect from 'expect';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import rootReducer from '../../redux/reducers/index';
-import { homeData, technologiesListMock } from './home-mock';
-import Enzyme, { shallow, mount } from 'enzyme';
+import {homeData, technologiesListMock} from './home-mock';
+import Enzyme, {shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {Home} from './Home';
-import configureStore from 'redux-mock-store'
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -25,15 +24,27 @@ const initialState = {
   posts: [],
   postById: null,
 };
-let wrapper;
-let store;
 
 Enzyme.configure({adapter: new Adapter()});
 
 describe('actions', () => {
+  let component;
+  const addTechnologyMock = jest.fn();
+  const deleteTechnologyMock = jest.fn();
+  const getPersonDataMock = jest.fn();
+  const getTechnologiesMock = jest.fn();
+  const personInfoMock = homeData;
+  const technologiesMock = technologiesListMock;
+
   beforeEach(() => {
-    store = mockStore(initialState);
-    // wrapper = shallow(<Home store={store}/>)
+    component = shallow(<Home
+        addTechnology={addTechnologyMock}
+        deleteTechnology={deleteTechnologyMock}
+        getPersonData={getPersonDataMock}
+        getTechnologies={getTechnologiesMock}
+        personInfo={personInfoMock}
+        technologiesList={technologiesMock}
+    />)
   });
 
   afterEach(() => {
@@ -44,27 +55,10 @@ describe('actions', () => {
     expect(Home).toBeDefined();
   });
 
-  it('should render correctly', () => {
-    const component = shallow(<Home store={store}/>);
-
-    expect(component).toMatchSnapshot();
+  it('should call the mock add technology function', () => {
+    component.find('#add-tech-button').simulate('click');
+    expect(addTechnologyMock.mock.calls.length).toBe(1);
   });
-
-  // it('should add technology on button click', () => {
-  //   const { enzymeWrapper, props } = setup();
-  //   const button = enzymeWrapper.find('#test');
-  //   button.props().onClick();
-  //   expect(props.technologiesList.length).toBe(props.technologiesList.length + 1);
-  // });
-  //
-  // it('should click on button', () => {
-  //   const component = mount(<Home />);
-  //   component
-  //           .find('#test')
-  //           .simulate('onclick');
-  //   expect(component).toMatchSnapshot();
-  //   component.unmount();
-  // });
 
   it('should create an action to add a technology', () => {
     const newTechnology = {
@@ -128,12 +122,12 @@ describe('actions', () => {
 
   it('should handle ADD_TECHNOLOGY', () => {
     expect(rootReducer({technologiesList: []}, {
-              type: ADD_TECHNOLOGY,
-              payload: {
-                id: 1,
-                name: 'New Technology'
-              }
-            })
+          type: ADD_TECHNOLOGY,
+          payload: {
+            id: 1,
+            name: 'New Technology'
+          }
+        })
     ).toEqual({
       technologiesList: [{
         name: 'New Technology',
@@ -142,19 +136,19 @@ describe('actions', () => {
     });
 
     expect(rootReducer({
-              technologiesList: [{
-                name: 'Presented Technology',
-                id: 1,
-              }]
-            },
-            {
-              type: ADD_TECHNOLOGY,
-              payload: {
-                id: 2,
-                name: 'New Technology'
-              }
-            }
-            )
+          technologiesList: [{
+            name: 'Presented Technology',
+            id: 1,
+          }]
+        },
+        {
+          type: ADD_TECHNOLOGY,
+          payload: {
+            id: 2,
+            name: 'New Technology'
+          }
+        }
+        )
     ).toEqual({
       technologiesList: [
         {
@@ -171,34 +165,34 @@ describe('actions', () => {
 
   it('should handle DELETE_TECHNOLOGY', () => {
     expect(rootReducer({
-              technologiesList: [{
-                name: 'Presented Technology',
-                id: 1,
-              }]
-            }, {
-              type: DELETE_TECHNOLOGY,
-              payload: 1
-            })
+          technologiesList: [{
+            name: 'Presented Technology',
+            id: 1,
+          }]
+        }, {
+          type: DELETE_TECHNOLOGY,
+          payload: 1
+        })
     ).toEqual({
       technologiesList: []
     });
 
     expect(rootReducer({
-              technologiesList: [
-                {
-                  name: 'Presented Technology',
-                  id: 1,
-                },
-                {
-                  id: 2,
-                  name: 'New Technology'
-                }]
+          technologiesList: [
+            {
+              name: 'Presented Technology',
+              id: 1,
             },
             {
-              type: DELETE_TECHNOLOGY,
-              payload: 2
-            }
-            )
+              id: 2,
+              name: 'New Technology'
+            }]
+        },
+        {
+          type: DELETE_TECHNOLOGY,
+          payload: 2
+        }
+        )
     ).toEqual({
       technologiesList: [
         {
