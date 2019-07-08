@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+cd ../../backend
+npm install
+npm start
+echo 'Server listening on port 3100'
+
 echo 'The following "npm" command builds your Node.js/React application for'
 echo 'production in the local "build" directory (i.e. within the'
 echo '"/var/jenkins_home/workspace/simple-node-js-react-app" directory),'
